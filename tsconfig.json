@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node", // This should be the correct setting
-    "target": "ES6",
-    "module": "CommonJS",
+    "target": "ES2017",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": ["src/**/*.ts"]
 }

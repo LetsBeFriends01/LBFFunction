@@ -10,10 +10,10 @@ A simple starter function. Edit `src/main.js` to get started and create somethin
 
 **Response**
 
-Sample `200` Response:
+to Convert into the dist
 
 ```text
-Hello, World!
+npx tsc
 ```
 
 ### POST, PUT, PATCH, DELETE /
@@ -36,7 +36,7 @@ Sample `200` Response:
 ## ⚙️ Configuration
 
 | Setting           | Value         |
-|-------------------|---------------|
+| ----------------- | ------------- |
 | Runtime           | Node (18.0)   |
 | Entrypoint        | `src/main.js` |
 | Build Commands    | `npm install` |

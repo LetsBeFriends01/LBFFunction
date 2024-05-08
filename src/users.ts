@@ -5,7 +5,6 @@ import {
   Databases,
   Query,
   Storage,
-  Users,
 } from "node-appwrite";
 
 const config = {
@@ -30,7 +29,7 @@ export default async ({ req, res, log, error }: any) => {
   const storage = new Storage(client);
   const account = new Account(client);
   const avatars = new Avatars(client);
-  const users = new Users(client);
+  // const users = new Users(client);
 
   const posts = await database.listDocuments(
     config.databaseId,
