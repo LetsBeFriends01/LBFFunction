@@ -30,7 +30,7 @@ export default async ({ req, res, log, error }: any) => {
   const account = new Account(client);
   const avatars = new Avatars(client);
   const users = new Users(client);
-
+  console.log("Payload", req.body);
   return res.json({ req: req, log: log, error });
 
   // switch (req.query.type) {
