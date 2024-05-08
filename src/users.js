@@ -4,7 +4,8 @@ import { Client, Databases, Query } from "node-appwrite";
 export default async ({ req, res, log, error }) => {
   const client = new Client()
     .setEndpoint(process.env.VITE_APPWRITE_URL)
-    .setProject(process.env.VITE_APPWRITE_PROJECT_ID);
+    .setProject(process.env.VITE_APPWRITE_PROJECT_ID)
+    .setKey(process.env.APPWRITE_SERVER_ACCESS_AUTH);
 
   const database = new Databases(client);
 
