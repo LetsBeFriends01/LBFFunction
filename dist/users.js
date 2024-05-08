@@ -1,4 +1,4 @@
-import { Account, Avatars, Client, Databases, Query, Storage, } from "node-appwrite";
+import { Account, Avatars, Client, Databases, Storage, Users, } from "node-appwrite";
 const config = {
     endpoint: process.env.VITE_APPWRITE_URL || "",
     projectId: process.env.VITE_APPWRITE_PROJECT_ID || "",
@@ -18,16 +18,13 @@ export default async ({ req, res, log, error }) => {
     const account = new Account(client);
     const avatars = new Avatars(client);
     const users = new Users(client);
-    const posts = await database.listDocuments(config.databaseId, config.postCollectionId, [Query.limit(5)]);
-    switch (req.query.type) {
-        case "test":
-            return res.json({
-                id: process.env.VITE_APPWRITE_PROJECT_ID,
-                name: posts,
-            });
-        case "getPosts":
-            return res.json(posts);
-        default:
-            return res.json({ message: "No type specified / unknown type" });
-    }
+    return res.json({ req: req, log: log, error });
+    // switch (req.query.type) {
+    //   case "test":
+    //     return res.json({
+    //       id: process.env.VITE_APPWRITE_PROJECT_ID,
+    //     });
+    //   default:
+    //     return res.json({ message: "No type specified / unknown type" });
+    // }
 };
