@@ -17,7 +17,7 @@ export default async ({ req, res, log, error }) => {
     const storage = new Storage(client);
     const account = new Account(client);
     const avatars = new Avatars(client);
-    // const users = new Users(client);
+    const users = new Users(client);
     const posts = await database.listDocuments(config.databaseId, config.postCollectionId, [Query.limit(5)]);
     switch (req.query.type) {
         case "test":

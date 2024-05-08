@@ -3,8 +3,8 @@ import {
   Avatars,
   Client,
   Databases,
-  Query,
   Storage,
+  Users,
 } from "node-appwrite";
 
 const config = {
@@ -29,23 +29,17 @@ export default async ({ req, res, log, error }: any) => {
   const storage = new Storage(client);
   const account = new Account(client);
   const avatars = new Avatars(client);
-  // const users = new Users(client);
+  const users = new Users(client);
 
-  const posts = await database.listDocuments(
-    config.databaseId,
-    config.postCollectionId,
-    [Query.limit(5)]
-  );
+  return res.json({ req: req, log: log, error });
 
-  switch (req.query.type) {
-    case "test":
-      return res.json({
-        id: process.env.VITE_APPWRITE_PROJECT_ID,
-        name: posts,
-      });
-    case "getPosts":
-      return res.json(posts);
-    default:
-      return res.json({ message: "No type specified / unknown type" });
-  }
+  // switch (req.query.type) {
+  //   case "test":
+  //     return res.json({
+  //       id: process.env.VITE_APPWRITE_PROJECT_ID,
+  //     });
+
+  //   default:
+  //     return res.json({ message: "No type specified / unknown type" });
+  // }
 };
