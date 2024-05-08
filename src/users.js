@@ -18,6 +18,6 @@ export default async ({ req, res, log, error }) => {
     }
 
     default:
-      return res.notFound();
+      return res.json({ message: "Hell nah" });
   }
 };
