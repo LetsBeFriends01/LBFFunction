@@ -1,4 +1,12 @@
-import { Client, Databases, Query } from "node-appwrite";
+import {
+  Account,
+  Avatars,
+  Client,
+  Databases,
+  Query,
+  Storage,
+  Users,
+} from "node-appwrite";
 
 // It's executed each time we get a request
 export default async ({ req, res, log, error }) => {
@@ -8,6 +16,10 @@ export default async ({ req, res, log, error }) => {
     .setKey(process.env.APPWRITE_SERVER_ACCESS_AUTH);
 
   const database = new Databases(client);
+  const storage = new Storage(client);
+  const account = new Account(client);
+  const avatars = new Avatars(client);
+  const users = new Users(client);
 
   const posts = await database.listDocuments(
     process.env.VITE_APPWRITE_DATABASE_ID,
@@ -24,6 +36,6 @@ export default async ({ req, res, log, error }) => {
     case "getPosts":
       return res.json(posts);
     default:
-      return res.json({ message: "Hell nah" });
+      return res.json({ message: "No type specified / unknown type" });
   }
 };
