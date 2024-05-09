@@ -6,7 +6,6 @@ import {
   Storage,
   Users,
 } from "node-appwrite";
-import { apppwriteConfig } from "./lib/appwriteConfig";
 
 const config = {
   projectIdL: process.env.VITE_APPWRITE_PROJECT_ID ?? "",
@@ -102,5 +101,5 @@ export default async ({ req, res, log, error }: any) => {
     }
   }
 
-  return res.json({ payload: apppwriteConfig.chatsCollectionId });
+  return res.json({ payload: req.body.whoLiked });
 };

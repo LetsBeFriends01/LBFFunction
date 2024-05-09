@@ -1,6 +1,5 @@
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
 import { Account, Avatars, Client, Databases, Storage, Users, } from "node-appwrite";
-import { apppwriteConfig } from "./lib/appwriteConfig";
 const config = {
     projectIdL: (_a = process.env.VITE_APPWRITE_PROJECT_ID) !== null && _a !== void 0 ? _a : "",
     url: (_b = process.env.VITE_APPWRITE_URL) !== null && _b !== void 0 ? _b : "",
@@ -59,5 +58,5 @@ export default async ({ req, res, log, error }) => {
             });
         }
     }
-    return res.json({ payload: apppwriteConfig.chatsCollectionId });
+    return res.json({ payload: req.body.whoLiked });
 };
