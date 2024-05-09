@@ -44,8 +44,18 @@ export default async ({ req, res, log, error }) => {
     //   console.log("Payload", req.headers["x-appwrite-event"].includes("delete"));
     if (req.body.whoLiked) {
         if (req.headers["x-appwrite-event"].includes("create")) {
+            console.log("CREATED!");
             console.log("body :", req.body);
-            console.log("whoLikedId :", req.body.whoLiked);
+            database.updateDocument(config.databaseId, config.postCollectionId, req.body.postId.$id, {
+                totalLikes: req.body.postId.totalLikes + 1,
+            });
+        }
+        if (req.headers["x-appwrite-event"].includes("delete")) {
+            console.log("DELETED!");
+            console.log("body :", req.body);
+            database.updateDocument(config.databaseId, config.postCollectionId, req.body.postId.$id, {
+                totalLikes: req.body.postId.totalLikes - 1,
+            });
         }
     }
     return res.json({ payload: req.body.whoLiked });
