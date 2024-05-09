@@ -32,5 +32,9 @@ export default async ({ req, res, log, error }: any) => {
   const users = new Users(client);
 
   console.log("Payload", req.body);
-  return res.json({ req: req, log: log, error });
+  res.json({ req: req, log: log, error });
+
+  if (req.body.whoLiked) {
+    console.log("Payload with conditional", req.body);
+  }
 };
