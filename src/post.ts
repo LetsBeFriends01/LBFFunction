@@ -31,8 +31,9 @@ export default async ({ req, res, log, error }: any) => {
   const avatars = new Avatars(client);
   const users = new Users(client);
 
-  log("Payload", req.body);
-  log("request", req);
+  console.log("Payload", req.body);
+  console.log("request", req);
+  log(`This function was called with ${req.method} method`);
   res.json({ req: req, log: log, error });
 
   if (req.body.whoLiked) {
