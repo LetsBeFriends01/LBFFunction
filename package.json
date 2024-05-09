@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
-    "toJs": "npx tsc"
+    "tojs": "npx tsc"
   },
   "dependencies": {
     "node-appwrite": "^9.0.0"
