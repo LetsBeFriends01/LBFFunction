@@ -18,7 +18,7 @@ export default async ({ req, res, log, error }) => {
     const account = new Account(client);
     const avatars = new Avatars(client);
     const users = new Users(client);
-    console.log("Payload", req.body);
+    console.log("Payload", req.headers["x-appwrite-event"]);
     console.log("request", req);
     log(`This function was called with ${req.method} method`);
     res.json({ req: req, log: log, error });
