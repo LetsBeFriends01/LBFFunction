@@ -22,5 +22,7 @@ export default async ({ req, res, log, error }) => {
     res.json({ req: req, log: log, error });
     if (req.body.whoLiked) {
         console.log("Payload with conditional", req.body);
+        return res.json({ payload: req.body.whoLiked });
     }
+    return res.json({ payload: req.body.whoLiked });
 };
