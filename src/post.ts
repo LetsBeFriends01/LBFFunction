@@ -75,8 +75,9 @@ export default async ({ req, res, log, error }: any) => {
   //   console.log("Payload", req.headers["x-appwrite-event"].includes("delete"));
 
   if (req.body.whoLiked) {
-    if (req.headers["x-appwrite-event"].includes("delete")) {
-      console.log("Yup included", "database ID: ", config.serverAccessAuth);
+    if (req.headers["x-appwrite-event"].includes("create")) {
+      console.log("body :", req.body);
+      console.log("whoLikedId :", req.body.whoLiked);
     }
   }
 
