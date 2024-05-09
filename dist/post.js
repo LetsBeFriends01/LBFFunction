@@ -18,8 +18,9 @@ export default async ({ req, res, log, error }) => {
     const account = new Account(client);
     const avatars = new Avatars(client);
     const users = new Users(client);
-    log("Payload", req.body);
-    log("request", req);
+    console.log("Payload", req.body);
+    console.log("request", req);
+    log(`This function was called with ${req.method} method`);
     res.json({ req: req, log: log, error });
     if (req.body.whoLiked) {
         console.log("Payload with conditional", req.body);
