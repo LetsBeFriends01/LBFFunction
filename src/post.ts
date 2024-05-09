@@ -74,7 +74,8 @@ export default async ({ req, res, log, error }: any) => {
 
   //   console.log("Payload", req.headers["x-appwrite-event"].includes("delete"));
 
-  if (req.body.whoLiked) {
+  //   USER POSTS LIKES
+  if (req.body.whoLiked && req.body.postId) {
     if (req.headers["x-appwrite-event"].includes("create")) {
       console.log("CREATED!");
       console.log("body :", req.body);
@@ -96,6 +97,34 @@ export default async ({ req, res, log, error }: any) => {
         req.body.postId.$id,
         {
           totalLikes: req.body.postId.totalLikes - 1,
+        }
+      );
+    }
+  }
+
+  //   USER REVIEW LIKES
+  if (req.body.whoLiked && req.body.reviewId) {
+    if (req.headers["x-appwrite-event"].includes("create")) {
+      console.log("CREATED!");
+      console.log("body :", req.body);
+      database.updateDocument(
+        config.databaseId,
+        config.reviewsCollectionId,
+        req.body.reviewId.$id,
+        {
+          totalLikes: req.body.reviewId.totalLikes + 1,
+        }
+      );
+    }
+    if (req.headers["x-appwrite-event"].includes("delete")) {
+      console.log("DELETED!");
+      console.log("body :", req.body);
+      database.updateDocument(
+        config.databaseId,
+        config.reviewsCollectionId,
+        req.body.reviewId.$id,
+        {
+          totalLikes: req.body.reviewId.totalLikes - 1,
         }
       );
     }
