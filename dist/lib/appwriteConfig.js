@@ -1,7 +1,5 @@
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
-import { Account, Avatars, Client, Databases, Storage, Users, } from "node-appwrite";
-import { apppwriteConfig } from "./lib/appwriteConfig";
-const config = {
+export const apppwriteConfig = {
     projectIdL: (_a = process.env.VITE_APPWRITE_PROJECT_ID) !== null && _a !== void 0 ? _a : "",
     url: (_b = process.env.VITE_APPWRITE_URL) !== null && _b !== void 0 ? _b : "",
     databaseId: (_c = process.env.VITE_APPWRITE_DATABASE_ID) !== null && _c !== void 0 ? _c : "",
@@ -30,34 +28,4 @@ const config = {
     friendListCollectionId: (_w = process.env.VITE_APPWRITE_FRIEND_LIST_COLLECTION_ID) !== null && _w !== void 0 ? _w : "",
     // API KEYS
     serverAccessAuth: (_x = process.env.APPWRITE_SERVER_ACCESS_AUTH) !== null && _x !== void 0 ? _x : "",
-};
-// It's executed each time we get a request
-export default async ({ req, res, log, error }) => {
-    const client = new Client()
-        .setEndpoint(config.url)
-        .setProject(config.projectIdL)
-        .setKey(config.serverAccessAuth);
-    const database = new Databases(client);
-    const storage = new Storage(client);
-    const account = new Account(client);
-    const avatars = new Avatars(client);
-    const users = new Users(client);
-    //   console.log("Payload", req.headers["x-appwrite-event"].includes("delete"));
-    if (req.body.whoLiked) {
-        if (req.headers["x-appwrite-event"].includes("create")) {
-            console.log("CREATED!");
-            console.log("body :", req.body);
-            database.updateDocument(config.databaseId, config.postCollectionId, req.body.postId.$id, {
-                totalLikes: req.body.postId.totalLikes + 1,
-            });
-        }
-        if (req.headers["x-appwrite-event"].includes("delete")) {
-            console.log("DELETED!");
-            console.log("body :", req.body);
-            database.updateDocument(config.databaseId, config.postCollectionId, req.body.postId.$id, {
-                totalLikes: req.body.postId.totalLikes - 1,
-            });
-        }
-    }
-    return res.json({ payload: apppwriteConfig.chatsCollectionId });
 };

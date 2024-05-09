@@ -1,14 +1,4 @@
-import {
-  Account,
-  Avatars,
-  Client,
-  Databases,
-  Storage,
-  Users,
-} from "node-appwrite";
-import { apppwriteConfig } from "./lib/appwriteConfig";
-
-const config = {
+export const apppwriteConfig = {
   projectIdL: process.env.VITE_APPWRITE_PROJECT_ID ?? "",
   url: process.env.VITE_APPWRITE_URL ?? "",
   databaseId: process.env.VITE_APPWRITE_DATABASE_ID ?? "",
@@ -58,49 +48,4 @@ const config = {
   // API KEYS
 
   serverAccessAuth: process.env.APPWRITE_SERVER_ACCESS_AUTH ?? "",
-};
-
-// It's executed each time we get a request
-export default async ({ req, res, log, error }: any) => {
-  const client = new Client()
-    .setEndpoint(config.url)
-    .setProject(config.projectIdL)
-    .setKey(config.serverAccessAuth);
-
-  const database = new Databases(client);
-  const storage = new Storage(client);
-  const account = new Account(client);
-  const avatars = new Avatars(client);
-  const users = new Users(client);
-
-  //   console.log("Payload", req.headers["x-appwrite-event"].includes("delete"));
-
-  if (req.body.whoLiked) {
-    if (req.headers["x-appwrite-event"].includes("create")) {
-      console.log("CREATED!");
-      console.log("body :", req.body);
-      database.updateDocument(
-        config.databaseId,
-        config.postCollectionId,
-        req.body.postId.$id,
-        {
-          totalLikes: req.body.postId.totalLikes + 1,
-        }
-      );
-    }
-    if (req.headers["x-appwrite-event"].includes("delete")) {
-      console.log("DELETED!");
-      console.log("body :", req.body);
-      database.updateDocument(
-        config.databaseId,
-        config.postCollectionId,
-        req.body.postId.$id,
-        {
-          totalLikes: req.body.postId.totalLikes - 1,
-        }
-      );
-    }
-  }
-
-  return res.json({ payload: apppwriteConfig.chatsCollectionId });
 };
