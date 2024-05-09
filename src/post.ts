@@ -105,7 +105,7 @@ export default async ({ req, res, log, error }: any) => {
   //   USER REVIEW LIKES
   if (req.body.whoLiked && req.body.reviewId) {
     if (req.headers["x-appwrite-event"].includes("create")) {
-      console.log("CREATED!");
+      console.log("REVIEW LIKE!");
       console.log("body :", req.body);
       database.updateDocument(
         config.databaseId,
@@ -117,7 +117,7 @@ export default async ({ req, res, log, error }: any) => {
       );
     }
     if (req.headers["x-appwrite-event"].includes("delete")) {
-      console.log("DELETED!");
+      console.log("REVIEW LIKE!");
       console.log("body :", req.body);
       database.updateDocument(
         config.databaseId,
