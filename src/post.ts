@@ -31,9 +31,8 @@ export default async ({ req, res, log, error }: any) => {
   const avatars = new Avatars(client);
   const users = new Users(client);
 
-  console.log("Payload", req.body);
-  console.log("variables", req.variables);
-  console.log("variables2", req.variables["APPWRITE_FUNCTION_EVENT_DATA"]);
+  log("Payload", req.body);
+  log("request", req);
   res.json({ req: req, log: log, error });
 
   if (req.body.whoLiked) {
