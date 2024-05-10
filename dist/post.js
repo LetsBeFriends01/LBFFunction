@@ -64,6 +64,8 @@ export default async ({ req, res, log, error }) => {
         if (req.headers["x-appwrite-event"].includes("create")) {
             console.log("REVIEW LIKE!");
             console.log("body :", req.body);
+            console.log("reviewCollection :", config.reviewsCollectionId);
+            console.log("reviewId :", req.body.reviewId.$id);
             database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
                 location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes + 1,
