@@ -72,6 +72,8 @@ export default async ({ req, res, log, error }) => {
         if (req.headers["x-appwrite-event"].includes("delete")) {
             console.log("REVIEW LIKE!");
             console.log("body :", req.body);
+            console.log("reviewCollection :", config.reviewsCollectionId);
+            console.log("reviewId :", req.body.reviewId.$id);
             database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
                 totalLikes: req.body.reviewId.totalLikes - 1,
             });
