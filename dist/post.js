@@ -65,6 +65,7 @@ export default async ({ req, res, log, error }) => {
             console.log("REVIEW LIKE!");
             console.log("body :", req.body);
             database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
+                location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes + 1,
             });
         }

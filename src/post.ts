@@ -112,6 +112,7 @@ export default async ({ req, res, log, error }: any) => {
         config.reviewsCollectionId,
         req.body.reviewId.$id,
         {
+          location: "In the app",
           totalLikes: req.body.reviewId.totalLikes + 1,
         }
       );
