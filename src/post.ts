@@ -103,11 +103,9 @@ export default async ({ req, res, log, error }: any) => {
   }
   //   USER REVIEW LIKES
   if (req.body.whoLiked && req.body.reviewId) {
-    console.log("headers", req.headers["x-appwrite-event"]);
-
     if (req.headers["x-appwrite-event"].includes("create")) {
-      console.log("REVIEW LIKE!");
-      console.log("body :", req.body);
+      console.log("What");
+
       database.updateDocument(
         config.databaseId,
         config.reviewsCollectionId,
@@ -119,8 +117,8 @@ export default async ({ req, res, log, error }: any) => {
       );
     }
     if (req.headers["x-appwrite-event"].includes("delete")) {
-      console.log("REVIEW UnLIKE!");
-      console.log("body :", req.body);
+      console.log("What");
+
       database.updateDocument(
         config.databaseId,
         config.reviewsCollectionId,
