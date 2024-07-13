@@ -44,7 +44,7 @@ const config = {
 
   // REVIEWS
 
-  reviewsCollectionId: process.env.VITE_APPWRITE_REVIEWS_COLLECTION_ID ?? "",
+  reviewsCollectionId: process.env.VITE_APPWRITE_REVIEWS_COLLECTION_ID!,
 
   likedReviewsCollectionId:
     process.env.VITE_APPWRITE_LIKED_REVIEWS_COLLECTION_ID ?? "",
@@ -107,8 +107,6 @@ export default async ({ req, res, log, error }: any) => {
     if (req.headers["x-appwrite-event"].includes("create")) {
       console.log("REVIEW LIKE!");
       console.log("body :", req.body);
-      console.log("reviewCollection :", config.reviewsCollectionId);
-      console.log("reviewId :", req.body.reviewId.$id);
       database.updateDocument(
         config.databaseId,
         config.reviewsCollectionId,
@@ -120,10 +118,8 @@ export default async ({ req, res, log, error }: any) => {
       );
     }
     if (req.headers["x-appwrite-event"].includes("delete")) {
-      console.log("REVIEW LIKE!");
+      console.log("REVIEW UnLIKE!");
       console.log("body :", req.body);
-      console.log("reviewCollection :", config.reviewsCollectionId);
-      console.log("reviewId :", req.body.reviewId.$id);
       database.updateDocument(
         config.databaseId,
         config.reviewsCollectionId,
