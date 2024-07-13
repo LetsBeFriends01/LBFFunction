@@ -76,7 +76,7 @@ export default async ({ req, res, log, error }) => {
             console.log("body :", req.body);
             console.log("totalLikes :", req.body.reviewId.totalLikes);
             console.log(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id);
-            database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
+            await database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
                 location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes + 1,
             });
@@ -86,7 +86,7 @@ export default async ({ req, res, log, error }) => {
             console.log("body :", req.body);
             console.log("totalLikes :", req.body.reviewId.totalLikes);
             console.log(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id);
-            database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
+            await database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
                 location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes - 1,
             });

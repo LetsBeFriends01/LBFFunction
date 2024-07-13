@@ -112,7 +112,7 @@ export default async ({ req, res, log, error }: any) => {
         req.body.reviewId.$id
       );
 
-      database.updateDocument(
+      await database.updateDocument(
         config.databaseId,
         config.reviewsCollectionId,
         req.body.reviewId.$id,
@@ -132,7 +132,7 @@ export default async ({ req, res, log, error }: any) => {
         req.body.reviewId.$id
       );
 
-      database.updateDocument(
+      await database.updateDocument(
         config.databaseId,
         config.reviewsCollectionId,
         req.body.reviewId.$id,
