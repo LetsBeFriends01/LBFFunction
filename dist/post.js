@@ -62,14 +62,20 @@ export default async ({ req, res, log, error }) => {
     //   USER REVIEW LIKES
     if (req.body.whoLiked && req.body.reviewId) {
         if (req.headers["x-appwrite-event"].includes("create")) {
-            console.log("What");
+            console.log("LIKED REVIEW!");
+            console.log("body :", req.body);
+            console.log("totalLikes :", req.body.reviewId.totalLikes);
+            console.log(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id);
             database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
                 location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes + 1,
             });
         }
         if (req.headers["x-appwrite-event"].includes("delete")) {
-            console.log("What");
+            console.log("UNLIKED REVIEW!");
+            console.log("body :", req.body);
+            console.log("totalLikes :", req.body.reviewId.totalLikes);
+            console.log(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id);
             database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
                 location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes - 1,
