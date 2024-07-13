@@ -74,36 +74,37 @@ export default async ({ req, res, log, error }: any) => {
 
   //   console.log("Payload", req.headers["x-appwrite-event"].includes("delete"));
 
-  //   USER POSTS LIKES
-  // if (req.body.whoLiked && req.body.postId) {
-  //   if (req.headers["x-appwrite-event"].includes("create")) {
-  //     console.log("CREATED!");
-  //     console.log("body :", req.body);
-  //     database.updateDocument(
-  //       config.databaseId,
-  //       config.postCollectionId,
-  //       req.body.postId.$id,
-  //       {
-  //         totalLikes: req.body.postId.totalLikes + 1,
-  //       }
-  //     );
-  //   }
-  //   if (req.headers["x-appwrite-event"].includes("delete")) {
-  //     console.log("DELETED!");
-  //     console.log("body :", req.body);
-  //     database.updateDocument(
-  //       config.databaseId,
-  //       config.postCollectionId,
-  //       req.body.postId.$id,
-  //       {
-  //         totalLikes: req.body.postId.totalLikes - 1,
-  //       }
-  //     );
-  //   }
-  // }
+  // USER POSTS LIKES
+  if (req.body.whoLiked && req.body.postId) {
+    if (req.headers["x-appwrite-event"].includes("create")) {
+      console.log("CREATED!");
+      console.log("body :", req.body);
+      database.updateDocument(
+        config.databaseId,
+        config.postCollectionId,
+        req.body.postId.$id,
+        {
+          totalLikes: req.body.postId.totalLikes + 1,
+        }
+      );
+    }
+    if (req.headers["x-appwrite-event"].includes("delete")) {
+      console.log("DELETED!");
+      console.log("body :", req.body);
+      database.updateDocument(
+        config.databaseId,
+        config.postCollectionId,
+        req.body.postId.$id,
+        {
+          totalLikes: req.body.postId.totalLikes - 1,
+        }
+      );
+    }
+  }
   //   USER REVIEW LIKES
-  console.log("BODY outside", req.body);
   if (req.body.whoLiked && req.body.reviewId) {
+    console.log("headers", req.headers["x-appwrite-event"]);
+
     if (req.headers["x-appwrite-event"].includes("create")) {
       console.log("REVIEW LIKE!");
       console.log("body :", req.body);
@@ -125,6 +126,7 @@ export default async ({ req, res, log, error }: any) => {
         config.reviewsCollectionId,
         req.body.reviewId.$id,
         {
+          location: "In the app",
           totalLikes: req.body.reviewId.totalLikes - 1,
         }
       );
