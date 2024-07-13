@@ -1,4 +1,4 @@
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
 import { Account, Avatars, Client, Databases, Storage, Users, } from "node-appwrite";
 const config = {
     projectIdL: (_a = process.env.VITE_APPWRITE_PROJECT_ID) !== null && _a !== void 0 ? _a : "",
@@ -23,12 +23,12 @@ const config = {
     verifyingStorageId: (_s = process.env.VITE_APPWRITE_VERIFYING_STORAGE_ID) !== null && _s !== void 0 ? _s : "",
     verifyingCollectionId: (_t = process.env.VITE_APPWRITE_VERIFYING_COLLECTION_ID) !== null && _t !== void 0 ? _t : "",
     // REVIEWS
-    reviewsCollectionId: (_u = process.env.VITE_APPWRITE_REVIEWS_COLLECTION_ID) !== null && _u !== void 0 ? _u : "",
-    likedReviewsCollectionId: (_v = process.env.VITE_APPWRITE_LIKED_REVIEWS_COLLECTION_ID) !== null && _v !== void 0 ? _v : "",
+    reviewsCollectionId: process.env.VITE_APPWRITE_REVIEWS_COLLECTION_ID,
+    likedReviewsCollectionId: (_u = process.env.VITE_APPWRITE_LIKED_REVIEWS_COLLECTION_ID) !== null && _u !== void 0 ? _u : "",
     // FRIEND LIST
-    friendListCollectionId: (_w = process.env.VITE_APPWRITE_FRIEND_LIST_COLLECTION_ID) !== null && _w !== void 0 ? _w : "",
+    friendListCollectionId: (_v = process.env.VITE_APPWRITE_FRIEND_LIST_COLLECTION_ID) !== null && _v !== void 0 ? _v : "",
     // API KEYS
-    serverAccessAuth: (_x = process.env.APPWRITE_SERVER_ACCESS_AUTH) !== null && _x !== void 0 ? _x : "",
+    serverAccessAuth: (_w = process.env.APPWRITE_SERVER_ACCESS_AUTH) !== null && _w !== void 0 ? _w : "",
 };
 // It's executed each time we get a request
 export default async ({ req, res, log, error }) => {
@@ -42,7 +42,7 @@ export default async ({ req, res, log, error }) => {
     const avatars = new Avatars(client);
     const users = new Users(client);
     //   console.log("Payload", req.headers["x-appwrite-event"].includes("delete"));
-    //   USER POSTS LIKES
+    // USER POSTS LIKES
     if (req.body.whoLiked && req.body.postId) {
         if (req.headers["x-appwrite-event"].includes("create")) {
             console.log("CREATED!");
@@ -62,21 +62,16 @@ export default async ({ req, res, log, error }) => {
     //   USER REVIEW LIKES
     if (req.body.whoLiked && req.body.reviewId) {
         if (req.headers["x-appwrite-event"].includes("create")) {
-            console.log("REVIEW LIKE!");
-            console.log("body :", req.body);
-            console.log("reviewCollection :", config.reviewsCollectionId);
-            console.log("reviewId :", req.body.reviewId.$id);
+            console.log("What");
             database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
                 location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes + 1,
             });
         }
         if (req.headers["x-appwrite-event"].includes("delete")) {
-            console.log("REVIEW LIKE!");
-            console.log("body :", req.body);
-            console.log("reviewCollection :", config.reviewsCollectionId);
-            console.log("reviewId :", req.body.reviewId.$id);
+            console.log("What");
             database.updateDocument(config.databaseId, config.reviewsCollectionId, req.body.reviewId.$id, {
+                location: "In the app",
                 totalLikes: req.body.reviewId.totalLikes - 1,
             });
         }
