@@ -101,7 +101,7 @@ export default async ({ req, res, log, error }: any) => {
       );
     }
   }
-
+  console.log("BODY outside", req.body);
   //   USER REVIEW LIKES
   if (req.body.whoLiked && req.body.reviewId) {
     if (req.headers["x-appwrite-event"].includes("create")) {
